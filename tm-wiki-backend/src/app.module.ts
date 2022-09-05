@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
-import { EntryModule } from './modules/entry/entry.module';
+import { WordEntryModule } from './modules/wordEntry/wordEntry.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [EntryModule],
+  imports: [
+    WordEntryModule,
+    MongooseModule.forRoot('mongodb://localhost/wiki-db'),
+  ],
   controllers: [],
   providers: [],
 })
