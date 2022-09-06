@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AddWordEntryDto } from './dto/add-wordEntry.dto';
@@ -19,6 +19,10 @@ export class WordEntryService {
   // 新增词条
   async addWordEntry(addWordEntryDto: AddWordEntryDto): Promise<WordEntry> {
     const _addWordEntry = new this.wordEntryModel(addWordEntryDto);
+    console.log(_addWordEntry, '_addWordEntry');
+    // if (!_addWordEntry?.name) {
+    //   throw new HttpException('名称不能为空', HttpStatus.OK);
+    // }
     return await _addWordEntry.save();
     // const createdCat = await this.wordEntryModel(addWordEntryDto);
     // return createdCat;

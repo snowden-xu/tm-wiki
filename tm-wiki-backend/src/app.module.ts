@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     WordEntryModule,
-    MongooseModule.forRoot('mongodb://localhost/wiki-db'),
+    MongooseModule.forRoot('mongodb://localhost/tm-wiki'),
   ],
   controllers: [],
   providers: [],
