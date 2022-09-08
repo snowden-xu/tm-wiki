@@ -19,22 +19,42 @@ export class WordEntryService {
   // 新增词条
   async addWordEntry(addWordEntryDto: AddWordEntryDto): Promise<WordEntry> {
     const _addWordEntry = new this.wordEntryModel(addWordEntryDto);
-    console.log(_addWordEntry, '_addWordEntry');
-    // if (!_addWordEntry?.name) {
-    //   throw new HttpException('名称不能为空', HttpStatus.OK);
-    // }
+    // console.log(_addWordEntry, '_addWordEntry');
+    if (!_addWordEntry?.name) {
+      throw new HttpException('名称不能为空', HttpStatus.OK);
+    }
     return await _addWordEntry.save();
     // const createdCat = await this.wordEntryModel(addWordEntryDto);
     // return createdCat;
   }
 
   // 更新词条
-  async updateWordEntry(id: string) {
-    return this.wordEntryModel.findOne({ _id: id }).exec();
+  async updateWordEntry(id: string, addWordEntryDto: AddWordEntryDto) {
+    const result = await this.wordEntryModel
+      .findOneAndUpdate(
+        { _id: id },
+        {
+          name: addWordEntryDto.name,
+          age: addWordEntryDto.age,
+          breed: addWordEntryDto.breed,
+        },
+      )
+      .exec();
+    if (!result) {
+      throw new HttpException('找不到对应数据', HttpStatus.OK);
+    }
+    return result;
   }
 
   // 删除词条
   async deleteWordEntry(id: string) {
-    return await this.wordEntryModel.findByIdAndRemove({ _id: id }).exec();
+    const result = await this.wordEntryModel
+      .findByIdAndRemove({ _id: id })
+      .exec();
+
+    if (!result) {
+      throw new HttpException('找不到对应数据', HttpStatus.OK);
+    }
+    return result;
   }
 }

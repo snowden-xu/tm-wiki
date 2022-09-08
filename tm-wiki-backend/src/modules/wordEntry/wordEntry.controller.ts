@@ -27,8 +27,11 @@ export class WordEntryController {
   }
 
   @Put(':id')
-  async updateEntry(@Body() id: string) {
-    return this.entryService.updateWordEntry(id);
+  async updateEntry(
+    @Param('id') id: string,
+    @Body() addWordEntryDto: AddWordEntryDto,
+  ) {
+    return this.entryService.updateWordEntry(id, addWordEntryDto);
   }
 
   @Delete(':id')
