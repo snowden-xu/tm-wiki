@@ -12,7 +12,7 @@ export class WordEntry {
   age: number;
 
   @Prop()
-  breed: string;
+  hobby: string;
 }
 
 export const WordEntrySchema = SchemaFactory.createForClass(WordEntry);

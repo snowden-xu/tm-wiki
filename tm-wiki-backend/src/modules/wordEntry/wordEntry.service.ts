@@ -20,15 +20,15 @@ export class WordEntryService {
   async addWordEntry(addWordEntryDto: AddWordEntryDto): Promise<WordEntry> {
     const _addWordEntry = new this.wordEntryModel(addWordEntryDto);
     // console.log(_addWordEntry, '_addWordEntry');
-    if (!_addWordEntry?.name) {
-      throw new HttpException(
-        {
-          message: '名称不能为空',
-          code: 400,
-        },
-        HttpStatus.OK,
-      );
-    }
+    // if (!_addWordEntry?.name) {
+    //   throw new HttpException(
+    //     {
+    //       message: '名称不能为空',
+    //       code: 400,
+    //     },
+    //     HttpStatus.OK,
+    //   );
+    // }
     return await _addWordEntry.save();
     // const createdCat = await this.wordEntryModel(addWordEntryDto);
     // return createdCat;
@@ -42,7 +42,7 @@ export class WordEntryService {
         {
           name: addWordEntryDto.name,
           age: addWordEntryDto.age,
-          breed: addWordEntryDto.breed,
+          hobby: addWordEntryDto.hobby,
         },
       )
       .exec();
