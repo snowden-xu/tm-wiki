@@ -21,7 +21,13 @@ export class WordEntryService {
     const _addWordEntry = new this.wordEntryModel(addWordEntryDto);
     // console.log(_addWordEntry, '_addWordEntry');
     if (!_addWordEntry?.name) {
-      throw new HttpException('名称不能为空', HttpStatus.OK);
+      throw new HttpException(
+        {
+          message: '名称不能为空',
+          code: 400,
+        },
+        HttpStatus.OK,
+      );
     }
     return await _addWordEntry.save();
     // const createdCat = await this.wordEntryModel(addWordEntryDto);
@@ -41,7 +47,13 @@ export class WordEntryService {
       )
       .exec();
     if (!result) {
-      throw new HttpException('找不到对应数据', HttpStatus.OK);
+      throw new HttpException(
+        {
+          message: '找不到对应数据',
+          code: 400,
+        },
+        HttpStatus.OK,
+      );
     }
     return result;
   }
@@ -53,7 +65,13 @@ export class WordEntryService {
       .exec();
 
     if (!result) {
-      throw new HttpException('找不到对应数据', HttpStatus.OK);
+      throw new HttpException(
+        {
+          message: '找不到对应数据',
+          code: 400,
+        },
+        HttpStatus.OK,
+      );
     }
     return result;
   }
